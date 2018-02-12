@@ -2,9 +2,10 @@
   "name": "bfmb-telegram-connector",
   "version": "0.0.0",
   "description": "Connector for BFMBFramework",
-  "main": "main.js",
+  "main": "./dist/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./dist/test.js",
+    "build": "gulp"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,14 @@
   "bugs": {
     "url": "https://github.com/BFMBFramework/TelegramConnector/issues"
   },
-  "homepage": "https://github.com/BFMBFramework/TelegramConnector#readme"
+  "homepage": "https://github.com/BFMBFramework/TelegramConnector#readme",
+  "dependencies": {
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "@types/request": "^2.47.0",
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^3.2.4",
+    "typescript": "^2.7.1"
+  }
 }
