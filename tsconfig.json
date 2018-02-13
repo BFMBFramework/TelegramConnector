@@ -1,13 +1,13 @@
 {
     "files": [
-        "src/main.ts",
+        "src/connector.ts",
         "src/lib/user.ts",
         "src/lib/connection.ts",
         "src/test.ts"
     ],
     "compilerOptions": {
         "noImplicitAny": true,
-        "target": "es5",
+        "target": "es6",
         "moduleResolution": "node",
     	"module": "commonjs"
     }
