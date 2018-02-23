@@ -31,6 +31,7 @@ class TelegramConnection {
             options.timeout = 15;
         request.get({ url: exports.TELEGRAM_URL + "bot" + this.token + "/getUpdates", formData: options }, (err, r, body) => {
             const response = JSON.parse(body).result;
+            console.log(response);
             if (err)
                 return callback(err);
             if (!response)

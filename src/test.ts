@@ -10,7 +10,7 @@ testConnection.getMe(function (err : Error, user : TelegramUser) {
 	console.log(user);
 });
 
-testConnection.getUpdates({ offset: 267885263, timeout: 15 }, function (err : Error, response : any) {
+testConnection.getUpdates({timeout: 15 }, function (err : Error, response : any) {
 	if (err) {
 		console.log(err);
 	}

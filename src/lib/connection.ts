@@ -39,6 +39,7 @@ export class TelegramConnection {
 
 		request.get({url: TELEGRAM_URL + "bot" + this.token + "/getUpdates", formData: options}, (err : any, r : any, body : string) => {
 			const response : Array<any> = JSON.parse(body).result;
+			console.log(response);
 			
 			if (err) return callback(err);
 			if (!response) return callback(new Error("No response received."));
