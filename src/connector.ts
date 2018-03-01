@@ -1,10 +1,13 @@
 import {TelegramConnection} from "./lib/connection";
 import {TelegramUser} from "./lib/user";
 
-export class TelegramConnector {
-	connections : TelegramConnection[];
+export default class TelegramConnector {
+	name : string;
+	connections : Array<TelegramConnection>;
 
-	constructor() {}
+	constructor() {
+		this.name = "Telegram";
+	}
 
 	addConnection(token : string, callback : Function) {
 		let connection : TelegramConnection = new TelegramConnection(token);
