@@ -8,7 +8,7 @@ testConnection.getMe(function (err, user) {
     }
     console.log(user);
 });
-testConnection.getUpdates({ offset: 267885263, timeout: 15 }, function (err, response) {
+testConnection.getUpdates({ timeout: 15 }, function (err, response) {
     if (err) {
         console.log(err);
     }

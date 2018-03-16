@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/BFMBFramework/TelegramConnector#readme",
   "dependencies": {
+    "bfmb-comcenter": "0.0.1",
     "request": "^2.83.0",
     "uuid": "^3.2.1"
   },

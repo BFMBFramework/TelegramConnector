@@ -1,3 +1,5 @@
+import {Connection} from "bfmb-comcenter";
+
 import * as request from "request";
 import * as uuidv1 from "uuid/v1";
 
@@ -5,16 +7,15 @@ import {TelegramUser} from "./user";
 
 export const TELEGRAM_URL = "https://api.telegram.org/";
 
-export class TelegramConnection {
-	id : string;
-	token : string;
-	last_update_id : number;
-	user : TelegramUser; 
+export class TelegramConnection extends Connection {
+	private token : string;
+	private last_update_id : number;
+	private user : TelegramUser; 
 
-	constructor (token : string) {
-		this.token = token;
+	constructor (options : any) {
+		super(options);
+		this.token = options.token;
 		this.last_update_id = 0;
-		this.id = uuidv1();
 	}
 
 	getMe (callback : Function) {

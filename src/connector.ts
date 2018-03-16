@@ -1,47 +1,38 @@
+import {Connector} from "bfmb-comcenter";
+
 import {TelegramConnection} from "./lib/connection";
 import {TelegramUser} from "./lib/user";
 
-export default class TelegramConnector {
-	name : string;
-	connections : Array<TelegramConnection>;
+export default class TelegramConnector extends Connector {
 
 	constructor() {
-		this.name = "Telegram";
+		super("Telegram");
 	}
 
-	addConnection(token : string, callback : Function) {
-		let connection : TelegramConnection = new TelegramConnection(token);
+	addConnection(options : any, callback : Function) {
+		const self = this;
+		let connection : TelegramConnection = new TelegramConnection(options);
 
 		connection.getMe(function (err : Error, user : TelegramUser) {
 			if (err) return callback(err);
-			this.connections.push(connection);
-			callback(null, connection.id);
+			self.connections.push(connection);
+			callback(null, connection.getId());
 		});
 	}
 
-	removeConnection(id : string, callback : Function) {
-		let index : number = this.connections.findIndex((i : TelegramConnection) => { return i.id === id });
-		if (index > -1) {
-			this.connections.splice(index, 1);
-			callback(null);
-		} else {
-			callback(new Error("No connection on list with id: " + id));
-		}
-	}
-
 	receiveMessage(id : string, options : any = {}, callback : Function) {
-		let index : number = this.connections.findIndex((i : TelegramConnection) => { return i.id === id });
-		if (index > -1) {
-			this.connections[index].getUpdates(options, callback);
+		const connection : TelegramConnection = <TelegramConnection> this.getConnection(id);
+		if (connection) {
+			connection.getUpdates(options, callback);
 		} else {
 			callback(new Error("No connection on list with id: " + id));
 		}
 	}
 
 	sendMessage(id : string, options : any = {}, callback : Function) {
-		let index : number = this.connections.findIndex((i : TelegramConnection) => { return i.id === id });
-		if (index > -1) {
-			this.connections[index].sendMessage(options, callback);
+		const connection : TelegramConnection = <TelegramConnection> this.getConnection(id);
+		if (connection) {
+			connection.sendMessage(options, callback);
 		} else {
 			callback(new Error("No connection on list with id: " + id));
 		}

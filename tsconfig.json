@@ -1,5 +1,6 @@
 {
     "files": [
+        "src/ext/bfmb-comcenter.d.ts",
         "src/connector.ts",
         "src/lib/user.ts",
         "src/lib/connection.ts",
