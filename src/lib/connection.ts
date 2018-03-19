@@ -1,7 +1,6 @@
-import {Connection} from "bfmb-comcenter";
-
 import * as request from "request";
-import * as uuidv1 from "uuid/v1";
+
+import {Connection} from "bfmb-base-connector";
 
 import {TelegramUser} from "./user";
 

@@ -1,15 +1,12 @@
 {
-    "files": [
-        "src/ext/bfmb-comcenter.d.ts",
-        "src/connector.ts",
-        "src/lib/user.ts",
-        "src/lib/connection.ts",
-        "src/test.ts"
+    "include": [
+        "src/**/*"
     ],
     "compilerOptions": {
         "noImplicitAny": true,
+        "declaration": true,
         "target": "es6",
         "moduleResolution": "node",
-    	"module": "commonjs"
+        "module": "commonjs"
     }
 }

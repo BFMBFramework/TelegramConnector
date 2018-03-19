@@ -1,4 +1,4 @@
-import {Connector} from "bfmb-comcenter";
+import { Connector } from "bfmb-base-connector";
 
 import {TelegramConnection} from "./lib/connection";
 import {TelegramUser} from "./lib/user";

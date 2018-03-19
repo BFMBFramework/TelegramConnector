@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const bfmb_comcenter_1 = require("bfmb-comcenter");
+const bfmb_base_connector_1 = require("bfmb-base-connector");
 const connection_1 = require("./lib/connection");
-class TelegramConnector extends bfmb_comcenter_1.Connector {
+class TelegramConnector extends bfmb_base_connector_1.Connector {
     constructor() {
         super("Telegram");
     }

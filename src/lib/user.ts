@@ -1,4 +1,3 @@
-
 export class TelegramUser {
 	id : number;
 	is_bot : boolean;

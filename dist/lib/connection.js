@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const bfmb_comcenter_1 = require("bfmb-comcenter");
 const request = require("request");
+const bfmb_base_connector_1 = require("bfmb-base-connector");
 const user_1 = require("./user");
 exports.TELEGRAM_URL = "https://api.telegram.org/";
-class TelegramConnection extends bfmb_comcenter_1.Connection {
+class TelegramConnection extends bfmb_base_connector_1.Connection {
     constructor(options) {
         super(options);
         this.token = options.token;

@@ -1,4 +1,4 @@
-declare module 'bfmb-comcenter' {
+declare module 'bfmb-base-connector' {
 
 	abstract class Connector {
 		protected name : string;
