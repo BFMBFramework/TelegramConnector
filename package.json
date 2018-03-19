@@ -1,6 +1,6 @@
 {
   "name": "bfmb-telegram-connector",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Telegram connector for BFMBFramework",
   "main": "./dist/connector.js",
   "scripts": {
