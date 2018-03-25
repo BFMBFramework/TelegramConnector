@@ -37,7 +37,7 @@ class TelegramConnector extends bfmb_base_connector_1.Connector {
         }
     }
 }
-exports.default = TelegramConnector;
+exports.TelegramConnector = TelegramConnector;
 class TelegramConnection extends bfmb_base_connector_1.Connection {
     constructor(options) {
         super(options);
@@ -90,3 +90,4 @@ class TelegramConnection extends bfmb_base_connector_1.Connection {
     }
 }
 exports.TelegramConnection = TelegramConnection;
+exports.connector = new TelegramConnector();

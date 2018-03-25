@@ -5,7 +5,7 @@ import {TelegramUser} from "./lib/user";
 
 export const TELEGRAM_URL = "https://api.telegram.org/";
 
-export default class TelegramConnector extends Connector {
+export class TelegramConnector extends Connector {
 
 	constructor() {
 		super("Telegram");
@@ -98,3 +98,5 @@ export class TelegramConnection extends Connection {
 		});
 	}
 }
+
+export const connector = new TelegramConnector();
