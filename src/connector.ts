@@ -11,7 +11,7 @@ export class TelegramConnector extends Connector {
 		super("Telegram");
 	}
 
-	addConnection(options : any, callback : Function) {
+	addConnection(options : any, callback : Function) : void {
 		const self = this;
 		let connection : TelegramConnection = new TelegramConnection(options);
 
@@ -22,7 +22,7 @@ export class TelegramConnector extends Connector {
 		});
 	}
 
-	receiveMessage(id : string, options : any = {}, callback : Function) {
+	receiveMessage(id : string, options : any = {}, callback : Function) : void{
 		const connection : TelegramConnection = <TelegramConnection> this.getConnection(id);
 		if (connection) {
 			connection.getUpdates(options, callback);
@@ -31,7 +31,7 @@ export class TelegramConnector extends Connector {
 		}
 	}
 
-	sendMessage(id : string, options : any = {}, callback : Function) {
+	sendMessage(id : string, options : any = {}, callback : Function) : void{
 		const connection : TelegramConnection = <TelegramConnection> this.getConnection(id);
 		if (connection) {
 			connection.sendMessage(options, callback);
@@ -52,7 +52,7 @@ export class TelegramConnection extends Connection {
 		this.last_update_id = 0;
 	}
 
-	getMe (callback : Function) {
+	getMe (callback : Function) : void{
 		if (this.user) {
 			return callback(null, this.user);
 		}
@@ -68,14 +68,13 @@ export class TelegramConnection extends Connection {
 		});
 	}
 
-	getUpdates (options : any = {}, callback : Function) {
+	getUpdates (options : any = {}, callback : Function) : void {
 		if (!options.offset) options.offset = this.last_update_id + 1;
 		if (!options.timeout) options.timeout = 15;
 
 		request.get({url: TELEGRAM_URL + "bot" + this.token + "/getUpdates", formData: options}, (err : any, r : any, body : string) => {
 			const response : Array<any> = JSON.parse(body).result;
-			console.log(response);
-			
+						
 			if (err) return callback(err);
 			if (!response) return callback(new Error("No response received."));
 
@@ -84,7 +83,7 @@ export class TelegramConnection extends Connection {
 		});
 	}
 
-	sendMessage (options : any = {}, callback : Function) {
+	sendMessage (options : any = {}, callback : Function) : void {
 		if(!options.chat_id) return callback(new Error("Parameter chat_id is required in Telegram API."));
 		if(!options.text) return callback(new Error("Parameter text is required in Telegram API."));
 
