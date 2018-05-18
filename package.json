@@ -33,6 +33,7 @@
     "bfmb-comcenter": "~0.2.0"
   },
   "devDependencies": {
+    "@types/node-telegram-bot-api": "^0.28.3",
     "@types/request": "^2.47.0",
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.2.4",

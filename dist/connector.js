@@ -1,92 +1,101 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const bfmb_base_connector_1 = require("bfmb-base-connector");
-const request = require("request");
-const user_1 = require("./lib/user");
-exports.TELEGRAM_URL = "https://api.telegram.org/";
+const TelegramBot = require("node-telegram-bot-api");
 class TelegramConnector extends bfmb_base_connector_1.Connector {
     constructor() {
         super("Telegram");
     }
     addConnection(options, callback) {
         const self = this;
-        let connection = new TelegramConnection(options);
-        connection.getMe(function (err, user) {
-            if (err)
-                return callback(err);
+        const connection = new TelegramConnection(options);
+        connection.getBot().getMe().then(function (user) {
             self.connections.push(connection);
             callback(null, connection.getId());
+        })
+            .catch(function (err) {
+            callback(err);
         });
     }
     receiveMessage(id, options = {}, callback) {
         const connection = this.getConnection(id);
         if (connection) {
-            connection.getUpdates(options, callback);
+            options = this.getUpdateOffset(connection, options);
+            connection.getBot().getUpdates(options).then(function (response) {
+                connection.setOffsetUpdateId(response[response.length - 1].update_id);
+                callback(null, response);
+            })
+                .catch(function (err) {
+                callback(err);
+            });
         }
         else {
             callback(new Error("No connection on list with id: " + id));
         }
     }
+    getUpdateOffset(connection, options) {
+        if (!options.offset)
+            options.offset = connection.getOffsetUpdateId() + 1;
+        return options;
+    }
     sendMessage(id, options = {}, callback) {
         const connection = this.getConnection(id);
-        if (connection) {
-            connection.sendMessage(options, callback);
+        const optionsError = this.verifySendMessageOptions(options);
+        if (connection && !optionsError) {
+            connection.getBot().sendMessage(options.chat_id, options.text, options.params)
+                .then(function (message) {
+                callback(null, message);
+            })
+                .catch(function (err) {
+                callback(err);
+            });
         }
-        else {
+        else if (!connection) {
             callback(new Error("No connection on list with id: " + id));
         }
+        else {
+            callback(optionsError);
+        }
+    }
+    verifySendMessageOptions(options) {
+        let error;
+        if (!options.chat_id && !options.text) {
+            error = new Error("Parameters chat_id and text are required in Telegram API.");
+        }
+        else if (!options.chat_id) {
+            error = new Error("Parameter chat_id is required in Telegram API.");
+        }
+        else if (!options.text) {
+            error = new Error("Parameter text is required in Telegram API.");
+        }
+        else {
+            error = null;
+        }
+        return error;
     }
 }
 exports.TelegramConnector = TelegramConnector;
 class TelegramConnection extends bfmb_base_connector_1.Connection {
     constructor(options) {
         super(options);
+        let tOptions = this.getTelegramBotOptions(options);
         this.token = options.token;
-        this.last_update_id = 0;
+        this.lastUpdateId = 0;
+        this.bot = new TelegramBot(this.token, tOptions);
     }
-    getMe(callback) {
-        if (this.user) {
-            return callback(null, this.user);
-        }
-        request.get({ url: exports.TELEGRAM_URL + "bot" + this.token + "/getMe" }, (err, r, body) => {
-            const response = JSON.parse(body).result;
-            if (err)
-                return callback(err);
-            if (!response)
-                return callback(new Error("No response received."));
-            this.user = new user_1.TelegramUser(response);
-            callback(null, this.user);
-        });
+    getTelegramBotOptions(options) {
+        return {
+            polling: options.polling
+        };
     }
-    getUpdates(options = {}, callback) {
-        if (!options.offset)
-            options.offset = this.last_update_id + 1;
-        if (!options.timeout)
-            options.timeout = 15;
-        request.get({ url: exports.TELEGRAM_URL + "bot" + this.token + "/getUpdates", formData: options }, (err, r, body) => {
-            const response = JSON.parse(body).result;
-            console.log(response);
-            if (err)
-                return callback(err);
-            if (!response)
-                return callback(new Error("No response received."));
-            this.last_update_id = response[response.length - 1].update_id;
-            callback(null, response);
-        });
+    getBot() {
+        return this.bot;
     }
-    sendMessage(options = {}, callback) {
-        if (!options.chat_id)
-            return callback(new Error("Parameter chat_id is required in Telegram API."));
-        if (!options.text)
-            return callback(new Error("Parameter text is required in Telegram API."));
-        request.post({ url: exports.TELEGRAM_URL + "bot" + this.token + "/sendMessage", formData: options }, (err, r, body) => {
-            const response = JSON.parse(body).result;
-            if (err)
-                return callback(err);
-            if (!response)
-                return callback(new Error("No response received."));
-            callback(null, response);
-        });
+    getOffsetUpdateId() {
+        return this.lastUpdateId;
+    }
+    setOffsetUpdateId(lastUpdateId) {
+        this.lastUpdateId = lastUpdateId;
     }
 }
 exports.TelegramConnection = TelegramConnection;
