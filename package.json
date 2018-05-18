@@ -26,6 +26,7 @@
   "homepage": "https://github.com/BFMBFramework/TelegramConnector#readme",
   "dependencies": {
     "bfmb-base-connector": "~0.2.0",
+    "node-telegram-bot-api": "^0.30.0",
     "request": "^2.83.0"
   },
   "peerDependencies": {
