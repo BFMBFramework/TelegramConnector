@@ -25,7 +25,7 @@ export class TelegramConnector extends Connector {
 		if (connection) {
 			options = this.getUpdateOffset(connection, options)
 			connection.getBot().getUpdates(options).then(function(response : TelegramBot.Update[]) {
-				connection.setOffsetUpdateId(response[response.length - 1].update_id);
+				connection.setOffsetUpdateId(this.parseUpdateOffset(response));
 				callback(null, response);
 			})
 			.catch(function(err : Error) {
@@ -39,6 +39,16 @@ export class TelegramConnector extends Connector {
 	private getUpdateOffset(connection : TelegramConnection, options : any) : any {
 		if (!options.offset) options.offset = connection.getOffsetUpdateId() + 1;
 		return options;
+	}
+
+	private parseUpdateOffset(response : TelegramBot.Update[]) : number {
+		let updateId : number;
+		if (response.length > 0) {
+			updateId = response[response.length - 1].update_id;
+		} else {
+			updateId = 0;
+		}
+		return updateId;
 	}
 
 	sendMessage(id : string, options : any = {}, callback : Function) : void {
