@@ -18,11 +18,12 @@ class TelegramConnector extends bfmb_base_connector_1.Connector {
         });
     }
     receiveMessage(id, options = {}, callback) {
-        const connection = this.getConnection(id);
+        const self = this;
+        const connection = self.getConnection(id);
         if (connection) {
-            options = this.getUpdateOffset(connection, options);
+            options = self.getUpdateOffset(connection, options);
             connection.getBot().getUpdates(options).then(function (response) {
-                connection.setOffsetUpdateId(this.parseUpdateOffset(response));
+                connection.setOffsetUpdateId(self.parseUpdateOffset(response));
                 callback(null, response);
             })
                 .catch(function (err) {
@@ -40,7 +41,7 @@ class TelegramConnector extends bfmb_base_connector_1.Connector {
     }
     parseUpdateOffset(response) {
         let updateId;
-        if (!response || response.length > 0) {
+        if (response.length > 0) {
             updateId = response[response.length - 1].update_id;
         }
         else {
@@ -49,8 +50,9 @@ class TelegramConnector extends bfmb_base_connector_1.Connector {
         return updateId;
     }
     sendMessage(id, options = {}, callback) {
-        const connection = this.getConnection(id);
-        const optionsError = this.verifySendMessageOptions(options);
+        const self = this;
+        const connection = self.getConnection(id);
+        const optionsError = self.verifySendMessageOptions(options);
         if (connection && !optionsError) {
             connection.getBot().sendMessage(options.chat_id, options.text, options.params)
                 .then(function (message) {
