@@ -43,7 +43,7 @@ export class TelegramConnector extends Connector {
 
 	private parseUpdateOffset(response : TelegramBot.Update[]) : number {
 		let updateId : number;
-		if (response.length > 0) {
+		if (!response || response.length > 0) {
 			updateId = response[response.length - 1].update_id;
 		} else {
 			updateId = 0;

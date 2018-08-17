@@ -22,7 +22,7 @@ class TelegramConnector extends bfmb_base_connector_1.Connector {
         if (connection) {
             options = this.getUpdateOffset(connection, options);
             connection.getBot().getUpdates(options).then(function (response) {
-                connection.setOffsetUpdateId(response[response.length - 1].update_id);
+                connection.setOffsetUpdateId(this.parseUpdateOffset(response));
                 callback(null, response);
             })
                 .catch(function (err) {
@@ -37,6 +37,16 @@ class TelegramConnector extends bfmb_base_connector_1.Connector {
         if (!options.offset)
             options.offset = connection.getOffsetUpdateId() + 1;
         return options;
+    }
+    parseUpdateOffset(response) {
+        let updateId;
+        if (!response || response.length > 0) {
+            updateId = response[response.length - 1].update_id;
+        }
+        else {
+            updateId = 0;
+        }
+        return updateId;
     }
     sendMessage(id, options = {}, callback) {
         const connection = this.getConnection(id);
