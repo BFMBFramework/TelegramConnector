@@ -20,7 +20,11 @@ export class TelegramConnector extends Connector {
 		});
 	}
 
-	receiveMessage(id : string, options : any = {}, callback : Function) : void{
+	getMe(id: string, options: any = {}, callback: Function): void {
+		callback(new Error("Not required."));
+	}
+
+	receiveMessage(id : string, options : any = {}, callback : Function) : void {
 		const self = this;
 		const connection : TelegramConnection = <TelegramConnection> self.getConnection(id);
 		if (connection) {

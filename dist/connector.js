@@ -17,6 +17,9 @@ class TelegramConnector extends bfmb_base_connector_1.Connector {
             callback(err);
         });
     }
+    getMe(id, options = {}, callback) {
+        callback(new Error("Not required."));
+    }
     receiveMessage(id, options = {}, callback) {
         const self = this;
         const connection = self.getConnection(id);
