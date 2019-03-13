@@ -7,15 +7,15 @@ export class TelegramConnector extends Connector {
 		super("Telegram");
 	}
 
-	addConnection(options : any, callback : Function) : void {
+	addConnection(options: any, callback: Function): void {
 		const self = this;
-		const connection : TelegramConnection = new TelegramConnection(options);
+		const connection: TelegramConnection = new TelegramConnection(options);
 
-		connection.getBot().getMe().then(function(user : TelegramBot.User) {
+		connection.getBot().getMe().then(function(user: TelegramBot.User) {
 			self.connections.push(connection);
 			callback(null, connection.getId());
 		})
-		.catch(function(err : Error) {
+		.catch(function(err: Error) {
 			callback(err);
 		});
 	}
@@ -24,16 +24,16 @@ export class TelegramConnector extends Connector {
 		callback(new Error("Not required."));
 	}
 
-	receiveMessage(id : string, options : any = {}, callback : Function) : void {
+	receiveMessage(id: string, options: any = {}, callback: Function): void {
 		const self = this;
-		const connection : TelegramConnection = <TelegramConnection> self.getConnection(id);
+		const connection: TelegramConnection = <TelegramConnection> self.getConnection(id);
 		if (connection) {
 			options = self.getUpdateOffset(connection, options)
-			connection.getBot().getUpdates(options).then(function(response : TelegramBot.Update[]) {
+			connection.getBot().getUpdates(options).then(function(response: TelegramBot.Update[]) {
 				connection.setOffsetUpdateId(self.parseUpdateOffset(response));
 				callback(null, response);
 			})
-			.catch(function(err : Error) {
+			.catch(function(err: Error) {
 				callback(err);
 			});
 		} else {
@@ -41,13 +41,13 @@ export class TelegramConnector extends Connector {
 		}
 	}
 
-	private getUpdateOffset(connection : TelegramConnection, options : any) : any {
+	private getUpdateOffset(connection: TelegramConnection, options: any): any {
 		if (!options.offset) options.offset = connection.getOffsetUpdateId() + 1;
 		return options;
 	}
 
-	private parseUpdateOffset(response : TelegramBot.Update[]) : number {
-		let updateId : number;
+	private parseUpdateOffset(response: TelegramBot.Update[]): number {
+		let updateId: number;
 		if (response.length > 0) {
 			updateId = response[response.length - 1].update_id;
 		} else {
@@ -56,16 +56,16 @@ export class TelegramConnector extends Connector {
 		return updateId;
 	}
 
-	sendMessage(id : string, options : any = {}, callback : Function) : void {
+	sendMessage(id: string, options: any = {}, callback: Function): void {
 		const self = this;
-		const connection : TelegramConnection = <TelegramConnection> self.getConnection(id);
-		const optionsError : Error = self.verifySendMessageOptions(options);
+		const connection: TelegramConnection = <TelegramConnection> self.getConnection(id);
+		const optionsError: Error = self.verifySendMessageOptions(options);
 		if (connection && !optionsError) {
 			connection.getBot().sendMessage(options.chat_id, options.text, options.params)
-			.then(function(message : TelegramBot.Message) {
+			.then(function(message: TelegramBot.Message) {
 				callback(null, message);
 			})
-			.catch(function(err : Error) {
+			.catch(function(err: Error) {
 				callback(err);
 			});
 		} else if (!connection) {
@@ -75,8 +75,8 @@ export class TelegramConnector extends Connector {
 		}
 	}
 
-	private verifySendMessageOptions(options : any) : Error {
-		let error : Error;
+	private verifySendMessageOptions(options: any): Error {
+		let error: Error;
 		if(!options.chat_id && !options.text) {
 			error = new Error("Parameters chat_id and text are required in Telegram API.");
 		} else if(!options.chat_id) {
@@ -91,11 +91,11 @@ export class TelegramConnector extends Connector {
 }
 
 export class TelegramConnection extends Connection {
-	private token : string;
-	private lastUpdateId : number;
-	private bot : TelegramBot;
+	private token: string;
+	private lastUpdateId: number;
+	private bot: TelegramBot;
 
-	constructor (options : any) {
+	constructor(options: any) {
 		super(options);
 		let tOptions = this.getTelegramBotOptions(options);
 		this.token = options.token;
@@ -103,21 +103,21 @@ export class TelegramConnection extends Connection {
 		this.bot = new TelegramBot(this.token, tOptions);
 	}
 
-	private getTelegramBotOptions(options : any) : any {
+	private getTelegramBotOptions(options: any): any {
 		return {
 			polling: options.polling
 		}
 	}
 
-	getBot() : TelegramBot {
+	getBot(): TelegramBot {
 		return this.bot;
 	}
 
-	getOffsetUpdateId() : number {
+	getOffsetUpdateId(): number {
 		return this.lastUpdateId;
 	}
 
-	setOffsetUpdateId(lastUpdateId : number) {
+	setOffsetUpdateId(lastUpdateId: number) {
 		this.lastUpdateId = lastUpdateId;
 	}
 }
