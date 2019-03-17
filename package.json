@@ -27,7 +27,7 @@
   "dependencies": {
     "bfmb-base-connector": "~0.2.0",
     "node-telegram-bot-api": "^0.30.0",
-    "request": "^2.83.0"
+    "request": "^2.88.0"
   },
   "peerDependencies": {
     "bfmb-comcenter": "~0.2.0"
@@ -35,8 +35,8 @@
   "devDependencies": {
     "@types/node-telegram-bot-api": "^0.28.3",
     "@types/request": "^2.47.0",
-    "gulp": "^3.9.1",
-    "gulp-typescript": "^3.2.4",
-    "typescript": "^2.7.1"
+    "gulp": "^4.0.0",
+    "gulp-typescript": "^5.0.1",
+    "typescript": "^3.3.3333"
   }
 }
