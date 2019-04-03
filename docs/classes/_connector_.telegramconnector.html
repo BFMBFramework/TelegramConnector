@@ -69,6 +69,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Class TelegramConnector. Extends Connector class from bfmb-base-connector module.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -131,9 +138,14 @@
 							<aside class="tsd-sources">
 								<p>Overrides Connector.__constructor</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/4836fd8/src/connector.ts#L4">connector.ts:4</a></li>
+									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/3d930c6/src/connector.ts#L11">connector.ts:11</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The constructor only calls to parent class passing the network identification.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <a href="_connector_.telegramconnector.html" class="tsd-signature-type">TelegramConnector</a></h4>
 						</li>
 					</ul>
@@ -148,7 +160,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Connector.connections</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/4836fd8/src/ext/bfmb-base-connector.d.ts#L5">ext/bfmb-base-connector.d.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/3d930c6/src/ext/bfmb-base-connector.d.ts#L5">ext/bfmb-base-connector.d.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -159,7 +171,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Connector.name</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/4836fd8/src/ext/bfmb-base-connector.d.ts#L4">ext/bfmb-base-connector.d.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/3d930c6/src/ext/bfmb-base-connector.d.ts#L4">ext/bfmb-base-connector.d.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -177,16 +189,28 @@
 							<aside class="tsd-sources">
 								<p>Overrides Connector.addConnection</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/4836fd8/src/connector.ts#L10">connector.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/3d930c6/src/connector.ts#L26">connector.ts:26</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>This method adds a TelegramConnection object to the connector.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>options: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A not type-defined object. Requires the attribute <strong>token</strong> to be valid.
+										This value is needed to contact with Telegram servers as a bot. The token is given by BotFather account.</p>
+									</div>
 								</li>
 								<li>
 									<h5>callback: <span class="tsd-signature-type">Function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Callback function which it gives the results or the failure of the task.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -204,7 +228,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Connector.getConnection</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/4836fd8/src/ext/bfmb-base-connector.d.ts#L15">ext/bfmb-base-connector.d.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/3d930c6/src/ext/bfmb-base-connector.d.ts#L15">ext/bfmb-base-connector.d.ts:15</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -228,7 +252,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Connector.getConnectionIndex</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/4836fd8/src/ext/bfmb-base-connector.d.ts#L13">ext/bfmb-base-connector.d.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/3d930c6/src/ext/bfmb-base-connector.d.ts#L13">ext/bfmb-base-connector.d.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -251,19 +275,33 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/4836fd8/src/connector.ts#L23">connector.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/3d930c6/src/connector.ts#L45">connector.ts:45</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>This method is not required for this connector.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>id: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The uuid of the connection to do the call.</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A not type-defined object. Actually it&#39;s empty.</p>
+									</div>
 								</li>
 								<li>
 									<h5>callback: <span class="tsd-signature-type">Function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Function which return response or error from the connection.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -281,7 +319,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Connector.getName</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/4836fd8/src/ext/bfmb-base-connector.d.ts#L9">ext/bfmb-base-connector.d.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/3d930c6/src/ext/bfmb-base-connector.d.ts#L9">ext/bfmb-base-connector.d.ts:9</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -298,7 +336,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/4836fd8/src/connector.ts#L44">connector.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/3d930c6/src/connector.ts#L72">connector.ts:72</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -324,7 +362,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/4836fd8/src/connector.ts#L49">connector.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/3d930c6/src/connector.ts#L77">connector.ts:77</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -348,19 +386,33 @@
 							<aside class="tsd-sources">
 								<p>Overrides Connector.receiveMessage</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/4836fd8/src/connector.ts#L27">connector.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/3d930c6/src/connector.ts#L55">connector.ts:55</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>This method is the universal method for calling get methods of Tado client module.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>id: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The uuid of the connection to do the call.</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A not type-defined object. Contains the parameters that the api endpoint require.</p>
+									</div>
 								</li>
 								<li>
 									<h5>callback: <span class="tsd-signature-type">Function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Function which return response or error from the connection.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -378,7 +430,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Connector.removeConnection</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/4836fd8/src/ext/bfmb-base-connector.d.ts#L17">ext/bfmb-base-connector.d.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/3d930c6/src/ext/bfmb-base-connector.d.ts#L17">ext/bfmb-base-connector.d.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -405,7 +457,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides Connector.sendMessage</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/4836fd8/src/connector.ts#L59">connector.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/3d930c6/src/connector.ts#L87">connector.ts:87</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -434,7 +486,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/4836fd8/src/connector.ts#L78">connector.ts:78</a></li>
+									<li>Defined in <a href="https://github.com/BFMBFramework/TelegramConnector/blob/3d930c6/src/connector.ts#L106">connector.ts:106</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>

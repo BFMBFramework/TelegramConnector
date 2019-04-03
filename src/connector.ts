@@ -1,12 +1,28 @@
+/**
+ * This file has both classes required for this module.
+ */
+
 import {Connector, Connection} from "bfmb-base-connector";
 import * as TelegramBot from "node-telegram-bot-api";
 
+/**
+ * Class TelegramConnector. Extends Connector class from bfmb-base-connector module.
+ */
 export class TelegramConnector extends Connector {
 
+	/**
+	 * The constructor only calls to parent class passing the network identification.
+	 */
 	constructor() {
 		super("Telegram");
 	}
 
+	/**
+	 * This method adds a TelegramConnection object to the connector.
+	 * @param options A not type-defined object. Requires the attribute **token** to be valid. 
+	 * This value is needed to contact with Telegram servers as a bot. The token is given by BotFather account.
+	 * @param callback Callback function which it gives the results or the failure of the task.
+	 */
 	addConnection(options: any, callback: Function): void {
 		const self = this;
 		const connection: TelegramConnection = new TelegramConnection(options);
@@ -20,10 +36,22 @@ export class TelegramConnector extends Connector {
 		});
 	}
 
+	/**
+	 * This method is not required for this connector.
+	 * @param id The uuid of the connection to do the call.
+	 * @param options A not type-defined object. Actually it's empty.
+	 * @param callback Function which return response or error from the connection.
+	 */
 	getMe(id: string, options: any = {}, callback: Function): void {
 		callback(new Error("Not required."));
 	}
 
+	/**
+	 * This method is the universal method for calling get methods of Tado client module.
+	 * @param id The uuid of the connection to do the call.
+	 * @param options A not type-defined object. Contains the parameters that the api endpoint require.
+	 * @param callback Function which return response or error from the connection.
+	 */
 	receiveMessage(id: string, options: any = {}, callback: Function): void {
 		const self = this;
 		const connection: TelegramConnection = <TelegramConnection> self.getConnection(id);
