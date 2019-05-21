@@ -1,11 +1,26 @@
 "use strict";
+/**
+ * This file has both classes required for this module.
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 const bfmb_base_connector_1 = require("bfmb-base-connector");
 const TelegramBot = require("node-telegram-bot-api");
+/**
+ * Class TelegramConnector. Extends Connector class from bfmb-base-connector module.
+ */
 class TelegramConnector extends bfmb_base_connector_1.Connector {
+    /**
+     * The constructor only calls to parent class passing the network identification.
+     */
     constructor() {
         super("Telegram");
     }
+    /**
+     * This method adds a TelegramConnection object to the connector.
+     * @param options A not type-defined object. Requires the attribute **token** to be valid.
+     * This value is needed to contact with Telegram servers as a bot. The token is given by BotFather account.
+     * @param callback Callback function which it gives the results or the failure of the task.
+     */
     addConnection(options, callback) {
         const self = this;
         const connection = new TelegramConnection(options);
@@ -17,9 +32,21 @@ class TelegramConnector extends bfmb_base_connector_1.Connector {
             callback(err);
         });
     }
+    /**
+     * This method is not required for this connector.
+     * @param id The uuid of the connection to do the call.
+     * @param options A not type-defined object. Actually it's empty.
+     * @param callback Function which return response or error from the connection.
+     */
     getMe(id, options = {}, callback) {
         callback(new Error("Not required."));
     }
+    /**
+     * This method is the universal method for calling get methods of Tado client module.
+     * @param id The uuid of the connection to do the call.
+     * @param options A not type-defined object. Contains the parameters that the api endpoint require.
+     * @param callback Function which return response or error from the connection.
+     */
     receiveMessage(id, options = {}, callback) {
         const self = this;
         const connection = self.getConnection(id);
